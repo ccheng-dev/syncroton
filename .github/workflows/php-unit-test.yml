@@ -1,0 +1,44 @@
+name: PHP unit test CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+
+  test:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ubuntu-20.04]
+        php-versions: ['7.4', '8.0']
+
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+
+    - name: Composer install
+      run: composer update -W
+
+    - name: Unit tests
+      run: |
+        ls -al
+        cd tests
+        ls -al
+        sudo apt install php-sqlite3
+        ../vendor/bin/phpunit --check-version
+        ../vendor/bin/phpunit --color

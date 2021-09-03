@@ -15,7 +15,7 @@
  * @package     Syncroton
  * @subpackage  Tests
  */
-class Syncroton_Backend_AllTests
+class Syncroton_Backend_AllTests extends \PHPUnit\Framework\TestCase
 {
     public static function main ()
     {
@@ -24,13 +24,13 @@ class Syncroton_Backend_AllTests
     
     public static function suite ()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Syncroton All Backend Tests');
+        $suite = new PHPUnit\Framework\TestSuite('Syncroton All Backend Tests');
         
-        $suite->addTestSuite('Syncroton_Backend_ContentTests');
-        $suite->addTestSuite('Syncroton_Backend_DeviceTests');
-        $suite->addTestSuite('Syncroton_Backend_FolderTests');
-        $suite->addTestSuite('Syncroton_Backend_PolicyTests');
-        $suite->addTestSuite('Syncroton_Backend_SyncStateTests');
+        $suite->addTestSuite(Syncroton_Backend_ContentTests::class);
+        $suite->addTestSuite(Syncroton_Backend_DeviceTests::class);
+        $suite->addTestSuite(Syncroton_Backend_FolderTests::class);
+        $suite->addTestSuite(Syncroton_Backend_PolicyTests::class);
+        $suite->addTestSuite(Syncroton_Backend_SyncStateTests::class);
         
         return $suite;
     }
